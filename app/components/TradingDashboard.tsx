@@ -372,62 +372,58 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <h1 className="text-3xl font-display font-bold text-white">AI Trading Dashboard</h1>
-          <p className="text-gray-300 mt-1">Visualize RWA and crypto trading activity with live simulations.</p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
-          <div className="space-y-2">
-            <label htmlFor="agent-select" className="text-sm font-display font-semibold text-gray-300 uppercase tracking-wider">
-              Active AI Agent
-            </label>
-            <select
-              id="agent-select"
-              value={selectedAgent.name}
-              onChange={(event) => handleAgentChange(event.target.value)}
-              className="custom-select w-full text-white focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition-all duration-200"
-            >
-              {AGENTS.map((agent) => (
-                <option key={agent.name} value={agent.name}>{agent.name}</option>
-              ))}
-            </select>
+    <div className="min-h-screen bg-slate-950 text-white p-6">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">AI Trading Dashboard</h1>
+            <p className="text-slate-400 mt-1">Visualize RWA and crypto trading activity with live simulations.</p>
           </div>
 
-          <div className="bg-[#0f2744]/80 backdrop-blur-sm rounded-2xl border border-teal-500/20 p-4 shadow-lg"
-               style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
-            <div className="text-sm font-display font-semibold text-gray-300 uppercase tracking-wider mb-3">Aggression</div>
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-400 font-display">Conservative</span>
-              <input
-                type="range"
-                min={0}
-                max={100}
-                value={aggression}
-                onChange={handleSliderChange}
-                className="slider-thumb h-2 w-full cursor-pointer appearance-none rounded-full bg-[#0a1628]/50"
-              />
-              <span className="text-xs text-gray-400 font-display">Aggressive</span>
+          <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
+            <div className="space-y-2">
+              <label htmlFor="agent-select" className="text-sm text-slate-400">Active AI Agent</label>
+              <select
+                id="agent-select"
+                value={selectedAgent.name}
+                onChange={(event) => handleAgentChange(event.target.value)}
+                className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-white shadow-inner outline-none focus:border-cyan-500"
+              >
+                {AGENTS.map((agent) => (
+                  <option key={agent.name} value={agent.name}>{agent.name}</option>
+                ))}
+              </select>
             </div>
-            <div className="mt-3 text-right text-sm font-display text-teal-300">{aggression}%</div>
+
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-4 shadow-inner">
+              <div className="text-sm text-slate-400 mb-2">Aggression</div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-slate-500">Conservative</span>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={aggression}
+                  onChange={handleSliderChange}
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-700 accent-cyan-400"
+                />
+                <span className="text-xs text-slate-500">Aggressive</span>
+              </div>
+              <div className="mt-2 text-right text-sm text-slate-300">{aggression}%</div>
+            </div>
           </div>
         </div>
-      </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 space-y-6">
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-              <div className="bg-[#0f2744]/80 backdrop-blur-sm rounded-3xl border border-teal-500/20 p-6 shadow-lg"
-                   style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
+              <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 shadow-lg">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-display font-semibold uppercase tracking-wider text-gray-400">Portfolio P&L</p>
-                    <h2 className="mt-3 text-2xl font-display font-semibold text-white">Live value tracker</h2>
+                    <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Portfolio P&L</p>
+                    <h2 className="mt-3 text-2xl font-semibold text-white">Live value tracker</h2>
                   </div>
-                  <div className="rounded-2xl px-4 py-2 text-sm font-display font-semibold text-slate-900 shadow-lg"
-                       style={{ backgroundColor: selectedAgent.color, boxShadow: `0 0 10px ${selectedAgent.color}40` }}>
+                  <div className="rounded-2xl px-3 py-2 text-sm font-semibold" style={{ backgroundColor: selectedAgent.color, color: '#020617' }}>
                     {selectedAgent.aggression}
                   </div>
                 </div>
@@ -435,21 +431,20 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                 <div className="mt-6 h-[340px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={pnlData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                       <XAxis dataKey="time" stroke="#94a3b8" fontSize={12} tick={{ fill: '#94a3b8' }} />
                       <YAxis stroke="#94a3b8" fontSize={12} tick={{ fill: '#94a3b8' }} domain={['dataMin - 100', 'dataMax + 100']} />
                       <Tooltip
-                        contentStyle={{ backgroundColor: '#0f2744', border: '1px solid rgba(45, 212, 191, 0.2)', borderRadius: 10, backdropFilter: 'blur(12px)' }}
+                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: 10 }}
                         labelStyle={{ color: '#f8fafc' }}
                       />
-                      <Line type="linear" dataKey="value" stroke="#22c55e" strokeWidth={2} dot={false} activeDot={false} />
+                      <Line type="linear" dataKey="value" stroke={selectedAgent.color} strokeWidth={1} dot={false} activeDot={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
               </div>
 
-              <div className="bg-[#0f2744]/80 backdrop-blur-sm rounded-3xl border border-teal-500/20 p-6 shadow-lg"
-                   style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
+              <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 shadow-lg">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedAgent.name}
@@ -461,44 +456,41 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div>
-                        <p className="text-sm font-display font-semibold uppercase tracking-wider text-gray-400">Agent</p>
-                        <h3 className="mt-2 text-2xl font-display font-semibold text-white">{selectedAgent.name}</h3>
+                        <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Agent</p>
+                        <h3 className="mt-2 text-2xl font-semibold text-white">{selectedAgent.name}</h3>
                       </div>
-                      <div className="h-12 w-12 rounded-2xl shadow-lg" style={{ backgroundColor: selectedAgent.color, boxShadow: `0 0 20px ${selectedAgent.color}60` }} />
+                      <div className="h-12 w-12 rounded-2xl" style={{ backgroundColor: selectedAgent.color }} />
                     </div>
 
-                    <div className="space-y-2 rounded-3xl bg-[#0a1628]/60 backdrop-blur-sm p-4 border border-teal-500/20"
-                         style={{ boxShadow: '0 0 15px rgba(45, 212, 191, 0.05)' }}>
-                      <p className="text-sm text-gray-300">{selectedAgent.description}</p>
+                    <div className="space-y-2 rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                      <p className="text-sm text-slate-400">{selectedAgent.description}</p>
                       <div className="grid gap-3">
-                        <div className="flex items-center justify-between text-sm text-gray-300">
-                          <span className="font-display">Trade frequency</span>
-                          <span className="font-display">{selectedAgent.tradeFrequency / 1000}s</span>
+                        <div className="flex items-center justify-between text-sm text-slate-300">
+                          <span>Trade frequency</span>
+                          <span>{selectedAgent.tradeFrequency / 1000}s</span>
                         </div>
-                        <div className="flex items-center justify-between text-sm text-gray-300">
-                          <span className="font-display">Aggression</span>
-                          <span className="font-display">{selectedAgent.defaultAggression}</span>
+                        <div className="flex items-center justify-between text-sm text-slate-300">
+                          <span>Aggression</span>
+                          <span>{selectedAgent.defaultAggression}</span>
                         </div>
-                        <div className="flex items-center justify-between text-sm text-gray-300">
-                          <span className="font-display">Bias</span>
-                          <span className="font-display capitalize">{selectedAgent.bias}</span>
+                        <div className="flex items-center justify-between text-sm text-slate-300">
+                          <span>Bias</span>
+                          <span className="capitalize">{selectedAgent.bias}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-3 rounded-3xl bg-[#0a1628]/60 backdrop-blur-sm p-4 border border-teal-500/20"
-                         style={{ boxShadow: '0 0 15px rgba(45, 212, 191, 0.05)' }}>
-                      <div className="flex items-center justify-between text-sm text-gray-400">
-                        <span className="font-display font-semibold">Confidence</span>
-                        <span className="text-white font-display font-semibold">{Math.round(agentConfidence)}%</span>
+                    <div className="space-y-3 rounded-3xl bg-slate-950/80 p-4 border border-slate-800">
+                      <div className="flex items-center justify-between text-sm text-slate-400">
+                        <span>Confidence</span>
+                        <span className="text-white">{Math.round(agentConfidence)}%</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="flex-1 rounded-full bg-[#0a1628]/50 p-1 border border-teal-500/20">
+                        <div className="flex-1 rounded-full bg-slate-800 p-1">
                           <motion.div
-                            className="h-3 rounded-full shadow-lg"
+                            className="h-3 rounded-full"
                             animate={{ width: `${agentConfidence}%`, backgroundColor: selectedAgent.color }}
                             transition={{ duration: 0.3 }}
-                            style={{ boxShadow: `0 0 10px ${selectedAgent.color}40` }}
                           />
                         </div>
                       </div>
@@ -509,10 +501,9 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-[1fr_0.9fr] gap-6">
-              <div className="bg-[#0f2744]/80 backdrop-blur-sm rounded-3xl border border-teal-500/20 p-6 shadow-lg"
-                   style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
-                <h2 className="text-xl font-display font-semibold text-white">Market Price Chart</h2>
-                <p className="mt-2 text-sm text-gray-300">RWA and crypto values move independently on their own update cadence.</p>
+              <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 shadow-lg">
+                <h2 className="text-xl font-semibold text-white">Market Price Chart</h2>
+                <p className="mt-2 text-sm text-slate-400">RWA and crypto values move independently on their own update cadence.</p>
                 <div className="mt-6 h-[360px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={graphData}>
@@ -528,11 +519,11 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                           );
                         })}
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                       <XAxis dataKey="time" stroke="#94a3b8" tick={{ fill: '#94a3b8' }} fontSize={12} />
                       <YAxis stroke="#94a3b8" tick={{ fill: '#94a3b8' }} fontSize={12} />
                       <Tooltip
-                        contentStyle={{ backgroundColor: '#0f2744', border: '1px solid rgba(45, 212, 191, 0.2)', borderRadius: 10, backdropFilter: 'blur(12px)' }}
+                        contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: 10 }}
                         labelStyle={{ color: '#f8fafc' }}
                       />
                       {marketTokens.map((token) => {
@@ -569,10 +560,9 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                 </div>
               </div>
 
-              <div className="bg-[#0f2744]/80 backdrop-blur-sm rounded-3xl border border-teal-500/20 p-6 shadow-lg"
-                   style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
-                <h2 className="text-xl font-display font-semibold text-white">Live Trade Feed</h2>
-                <div className="mt-4 space-y-3 h-[460px] overflow-y-auto pr-1 custom-scrollbar">
+              <div className="bg-slate-900 rounded-3xl border border-slate-800 p-6 shadow-lg">
+                <h2 className="text-xl font-semibold text-white">Live Trade Feed</h2>
+                <div className="mt-4 space-y-3 h-[460px] overflow-y-auto pr-1">
                   <AnimatePresence>
                     {trades.map((trade) => (
                       <motion.div
@@ -581,26 +571,21 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
                         transition={{ duration: 0.25 }}
-                        className={`rounded-2xl border p-4 transition-all duration-200 hover:scale-[1.02] ${
-                          trade.type === 'buy'
-                            ? 'bg-teal-500/10 border-teal-500/30 hover:bg-teal-500/15'
-                            : 'bg-red-500/10 border-red-500/30 hover:bg-red-500/15'
-                        }`}
-                        style={{ boxShadow: trade.type === 'buy' ? '0 0 10px rgba(45, 212, 191, 0.1)' : '0 0 10px rgba(239, 68, 68, 0.1)' }}
+                        className={`rounded-3xl border p-4 shadow-sm ${trade.type === 'buy' ? 'bg-emerald-950/40 border-emerald-500/30' : 'bg-rose-950/40 border-rose-500/25'}`}
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <p className="font-display font-semibold text-white">{trade.asset}</p>
-                            <p className="text-sm text-gray-400">{trade.quantity} units</p>
+                            <p className="font-semibold text-white">{trade.asset}</p>
+                            <p className="text-sm text-slate-400">{trade.quantity} units</p>
                           </div>
                           <div className="text-right">
-                            <p className={`font-display font-semibold ${trade.type === 'buy' ? 'text-emerald-400' : 'text-rose-400'}`}>{trade.type.toUpperCase()}</p>
-                            <p className="text-xs text-gray-500">{trade.timestamp.toLocaleTimeString()}</p>
+                            <p className={`font-semibold ${trade.type === 'buy' ? 'text-emerald-400' : 'text-rose-400'}`}>{trade.type.toUpperCase()}</p>
+                            <p className="text-xs text-slate-500">{trade.timestamp.toLocaleTimeString()}</p>
                           </div>
                         </div>
-                        <div className="mt-3 flex items-center justify-between text-sm text-gray-300">
-                          <span className="font-display">Price</span>
-                          <span className="font-display">${trade.price.toFixed(2)}</span>
+                        <div className="mt-3 flex items-center justify-between text-sm text-slate-300">
+                          <span>Price</span>
+                          <span>${trade.price.toFixed(2)}</span>
                         </div>
                       </motion.div>
                     ))}
@@ -609,39 +594,38 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-teal-500/20 bg-[#0f2744]/80 backdrop-blur-sm shadow-lg"
-                 style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
-              <div className="flex items-center justify-between border-b border-teal-500/20 px-6 py-4">
+            <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-lg">
+              <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
                 <div>
-                  <h2 className="text-lg font-display font-semibold text-white">Market Table</h2>
-                  <p className="text-sm text-gray-300">Realtime token metrics and token status.</p>
+                  <h2 className="text-lg font-semibold text-white">Market Table</h2>
+                  <p className="text-sm text-slate-400">Realtime token metrics and token status.</p>
                 </div>
-                <div className="text-sm text-gray-400 font-display">Updated every interval</div>
+                <div className="text-sm text-slate-400">Updated every interval</div>
               </div>
-              <div className="min-w-full overflow-x-auto custom-scrollbar">
+              <div className="min-w-full overflow-x-auto">
                 <table className="w-full border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b border-teal-500/20 text-gray-400">
-                      <th className="px-6 py-4 font-display">Token Name</th>
-                      <th className="px-6 py-4 font-display">Current Price</th>
-                      <th className="px-6 py-4 font-display">24h Change</th>
-                      <th className="px-6 py-4 font-display">Volume</th>
-                      <th className="px-6 py-4 font-display">Holders</th>
+                    <tr className="border-b border-slate-800 text-slate-400">
+                      <th className="px-6 py-4">Token Name</th>
+                      <th className="px-6 py-4">Current Price</th>
+                      <th className="px-6 py-4">24h Change</th>
+                      <th className="px-6 py-4">Volume</th>
+                      <th className="px-6 py-4">Holders</th>
                     </tr>
                   </thead>
                   <tbody>
                     {marketTokens.map((token) => (
-                      <tr key={token.name} className="border-b border-teal-500/10 hover:bg-teal-500/5 transition-all duration-200">
+                      <tr key={token.name} className="border-b border-slate-800">
                         <td className="px-6 py-4 align-top">
                           <div className="flex items-center gap-2">
-                            <span className="font-display font-semibold text-white">{token.name}</span>
+                            <span className="font-semibold text-white">{token.name}</span>
                             <AnimatePresence>
                               {token.isNew ? (
                                 <motion.span
                                   initial={{ opacity: 0, y: -4 }}
                                   animate={{ opacity: 1, y: 0 }}
                                   exit={{ opacity: 0, y: -4 }}
-                                  className="rounded-full bg-emerald-500/20 px-2 py-1 text-[10px] font-display font-semibold uppercase tracking-[0.18em] text-emerald-300"
+                                  className="rounded-full bg-emerald-500/20 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300"
                                 >
                                   New
                                 </motion.span>
@@ -649,12 +633,12 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
                             </AnimatePresence>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-slate-100 font-display">${token.currentPrice.toFixed(2)}</td>
-                        <td className={`px-6 py-4 font-display ${token.change24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                        <td className="px-6 py-4 text-slate-100">${token.currentPrice.toFixed(2)}</td>
+                        <td className={`px-6 py-4 ${token.change24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                           {token.change24h >= 0 ? '+' : ''}{token.change24h.toFixed(2)}%
                         </td>
-                        <td className="px-6 py-4 text-slate-300 font-display">{token.volume.toLocaleString()}</td>
-                        <td className="px-6 py-4 text-slate-300 font-display">{token.holders.toLocaleString()}</td>
+                        <td className="px-6 py-4 text-slate-300">{token.volume.toLocaleString()}</td>
+                        <td className="px-6 py-4 text-slate-300">{token.holders.toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -663,46 +647,43 @@ export default function TradingDashboard({ onMintReceived }: TradingDashboardPro
             </div>
           </div>
 
-          <div className="lg:col-span-4 bg-[#0f2744]/80 backdrop-blur-sm rounded-3xl border border-teal-500/20 p-6 shadow-lg"
-               style={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.1)' }}>
-            <h2 className="text-xl font-display font-semibold text-white">Agent Snapshot</h2>
+          <div className="lg:col-span-4 bg-slate-900 rounded-3xl border border-slate-800 p-6 shadow-lg">
+            <h2 className="text-xl font-semibold text-white">Agent Snapshot</h2>
             <div className="mt-6 space-y-4">
-              <div className="rounded-3xl bg-[#0a1628]/60 backdrop-blur-sm p-5 border border-teal-500/20"
-                   style={{ boxShadow: '0 0 15px rgba(45, 212, 191, 0.05)' }}>
+              <div className="rounded-3xl bg-slate-950/80 p-5">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-sm font-display font-semibold uppercase tracking-wider text-gray-400">Active AI</p>
-                    <p className="mt-2 text-2xl font-display font-semibold text-white">{selectedAgent.name}</p>
+                    <p className="text-sm uppercase tracking-[0.18em] text-slate-500">Active AI</p>
+                    <p className="mt-2 text-2xl font-semibold text-white">{selectedAgent.name}</p>
                   </div>
-                  <div className="h-14 w-14 rounded-2xl shadow-lg" style={{ backgroundColor: selectedAgent.color, boxShadow: `0 0 20px ${selectedAgent.color}60` }} />
+                  <div className="h-14 w-14 rounded-2xl" style={{ backgroundColor: selectedAgent.color }} />
                 </div>
-                <p className="mt-4 text-sm text-gray-300">{selectedAgent.description}</p>
+                <p className="mt-4 text-sm text-slate-400">{selectedAgent.description}</p>
               </div>
 
-              <div className="rounded-3xl bg-[#0a1628]/60 backdrop-blur-sm p-5 border border-teal-500/20"
-                   style={{ boxShadow: '0 0 15px rgba(45, 212, 191, 0.05)' }}>
-                <div className="flex justify-between text-sm text-gray-400">
-                  <span className="font-display font-semibold">Strategy</span>
-                  <span className="text-white font-display font-semibold">{selectedAgent.aggression}</span>
+              <div className="rounded-3xl bg-slate-950/80 p-5">
+                <div className="flex justify-between text-sm text-slate-400">
+                  <span>Strategy</span>
+                  <span className="text-slate-100">{selectedAgent.aggression}</span>
                 </div>
-                <div className="mt-4 rounded-full bg-[#0a1628]/50 p-4 border border-teal-500/20">
-                  <div className="flex justify-between text-sm text-gray-400">
-                    <span className="font-display">Trade cadence</span>
-                    <span className="text-white font-display">{selectedAgent.tradeFrequency / 1000}s</span>
+                <div className="mt-4 rounded-full bg-slate-800 p-4">
+                  <div className="flex justify-between text-sm text-slate-400">
+                    <span>Trade cadence</span>
+                    <span className="text-slate-100">{selectedAgent.tradeFrequency / 1000}s</span>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-3xl bg-[#0a1628]/60 backdrop-blur-sm p-5 border border-teal-500/20"
-                   style={{ boxShadow: '0 0 15px rgba(45, 212, 191, 0.05)' }}>
-                <div className="flex justify-between text-sm text-gray-400">
-                  <span className="font-display font-semibold">Confidence</span>
-                  <span className="text-white font-display font-semibold">{Math.round(agentConfidence)}%</span>
+              <div className="rounded-3xl bg-slate-950/80 p-5">
+                <div className="flex justify-between text-sm text-slate-400">
+                  <span>Confidence</span>
+                  <span className="text-slate-100">{Math.round(agentConfidence)}%</span>
                 </div>
-                <div className="mt-3 h-3 overflow-hidden rounded-full bg-[#0a1628]/50 border border-teal-500/20">
-                  <div
-                    className="h-full rounded-full shadow-lg"
-                    style={{ width: agentConfidence + '%', backgroundColor: selectedAgent.color, boxShadow: '0 0 10px rgba(45, 212, 191, 0.4)' }}
+                <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-800">
+                  <motion.div
+                    className="h-full rounded-full"
+                    animate={{ width: `${agentConfidence}%`, backgroundColor: selectedAgent.color }}
+                    transition={{ duration: 0.3 }}
                   />
                 </div>
               </div>
