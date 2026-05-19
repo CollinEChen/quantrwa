@@ -56,28 +56,28 @@ export function AssetAppraisalForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Asset Appraisal</h1>
+          <div className="bg-slate-950 border-slate-900 rounded-3xl p-8 text-white shadow-xl">
+      <h1 className="text-3xl font-bold mb-6 text-white">Asset Appraisal</h1>
 
       {/* Input Form */}
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm font-medium mb-2">Asset Name</label>
+          <label className="block text-sm font-medium mb-2 text-slate-300">Asset Name</label>
           <input
             type="text"
             value={assetName}
             onChange={(e) => setAssetName(e.target.value)}
             placeholder="e.g., Vintage Rolex Watch"
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-slate-700 rounded-lg bg-slate-900 text-white outline-none focus:border-cyan-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">Category</label>
+          <label className="block text-sm font-medium mb-2 text-slate-300">Category</label>
           <select
             value={assetCategory}
             onChange={(e) => setAssetCategory(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-slate-700 rounded-lg bg-slate-900 text-white outline-none focus:border-cyan-500"
           >
             <option value="artwork">Artwork</option>
             <option value="jewelry">Jewelry</option>
@@ -88,14 +88,14 @@ export function AssetAppraisalForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">Upload Image</label>
+          <label className="block text-sm font-medium mb-2 text-slate-300">Upload Image</label>
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
             onChange={handleImageSelect}
             disabled={loading || mintLoading}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-slate-700 rounded-lg bg-slate-900 text-white outline-none focus:border-cyan-500"
           />
         </div>
       </div>
@@ -113,14 +113,14 @@ export function AssetAppraisalForm() {
 
       {/* Loading */}
       {loading && (
-        <div className="p-4 bg-blue-50 text-blue-700 rounded-lg">
+        <div className="p-4 bg-slate-900 text-slate-100 rounded-lg border border-slate-700">
           Appraising asset with Gemini Vision...
         </div>
       )}
 
       {/* Error */}
       {error && (
-        <div className="p-4 bg-red-50 text-red-700 rounded-lg">
+        <div className="p-4 bg-rose-950 text-rose-100 rounded-lg border border-rose-700">
           Error: {error.message}
         </div>
       )}
@@ -128,32 +128,32 @@ export function AssetAppraisalForm() {
       {/* Result */}
       {result && (
         <div className="space-y-4">
-          <div className="p-4 bg-green-50 rounded-lg">
-            <h2 className="text-lg font-bold mb-4 text-green-900">Appraisal Result</h2>
+          <div className="p-4 bg-slate-900/80 rounded-lg border border-slate-700">
+            <h2 className="text-lg font-bold mb-4 text-white">Appraisal Result</h2>
 
             {/* Appraisal Details */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
-                <p className="text-sm text-gray-600">Estimated Value</p>
-                <p className="text-2xl font-bold text-green-700">
+                <p className="text-sm text-slate-400">Estimated Value</p>
+                <p className="text-2xl font-bold text-emerald-300">
                   ${result.appraisal.estimatedValue.toLocaleString()}
                 </p>
               </div>
 
               <div>
-                <p className="text-sm text-gray-600">Risk Score</p>
-                <p className="text-2xl font-bold text-orange-700">
+                <p className="text-sm text-slate-400">Risk Score</p>
+                <p className="text-2xl font-bold text-orange-300">
                   {result.appraisal.riskScore}/100
                 </p>
               </div>
 
               <div>
-                <p className="text-sm text-gray-600">Condition</p>
-                <p className="text-lg font-semibold">{result.appraisal.condition}</p>
+                <p className="text-sm text-slate-400">Condition</p>
+                <p className="text-lg font-semibold text-white">{result.appraisal.condition}</p>
               </div>
 
               <div>
-                <p className="text-sm text-gray-600">Status</p>
+                <p className="text-sm text-slate-400">Status</p>
                 <p
                   className={`text-lg font-semibold ${
                     result.authorization.authorized ? 'text-green-700' : 'text-red-700'
@@ -167,19 +167,19 @@ export function AssetAppraisalForm() {
             {/* Notes */}
             {result.appraisal.notes && (
               <div className="mb-4">
-                <p className="text-sm text-gray-600 mb-1">Notes</p>
-                <p className="text-gray-800">{result.appraisal.notes}</p>
+                <p className="text-sm text-slate-400 mb-1">Notes</p>
+                <p className="text-slate-100">{result.appraisal.notes}</p>
               </div>
             )}
 
             {/* Authorization Details */}
-            <div className="border-t pt-4">
-              <p className="text-sm text-gray-600 mb-1">Authorization</p>
-              <p className="text-gray-800">{result.authorization.message}</p>
-              
+            <div className="border-t border-slate-800 pt-4">
+              <p className="text-sm text-slate-400 mb-1">Authorization</p>
+              <p className="text-slate-100">{result.authorization.message}</p>
+
               {result.signature && (
                 <div className="mt-2">
-                  <p className="text-xs text-gray-500 truncate">
+                  <p className="text-xs text-slate-500 truncate">
                     Signature: {result.signature}
                   </p>
                 </div>
@@ -193,7 +193,7 @@ export function AssetAppraisalForm() {
                   type="button"
                   onClick={handleMint}
                   disabled={mintLoading}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-lg hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  className="w-full px-6 py-3 bg-linear-to-r from-purple-600 to-blue-600 text-white font-bold rounded-lg hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                   {mintLoading ? 'Minting SPL Token...' : 'Mint SPL Token (10,000 shares)'}
                 </button>
@@ -201,7 +201,7 @@ export function AssetAppraisalForm() {
             )}
 
             {mintError && (
-              <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg">
+              <div className="mt-4 p-4 bg-rose-950 text-rose-100 rounded-lg border border-rose-700">
                 Mint Error: {mintError.message}
               </div>
             )}
