@@ -18,7 +18,7 @@ export default function Home() {
             <AssetAppraisalForm />
          
 
-          <div className="bg-slate-950 border border-slate-700 rounded-3xl p-8 text-white shadow-xl">
+          <div className="bg-slate-950 border border-slate-700 rounded-3xl p-8 text-white ">
             <h2 className="text-3xl font-semibold mb-3">AI Trading Dashboard</h2>
             <p className="text-slate-300 max-w-2xl mb-6">
               The trading dashboard is now on its own page for a cleaner experience. Open it to view agent-based trades, market graphs, and live analytics.

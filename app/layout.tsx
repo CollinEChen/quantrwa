@@ -30,9 +30,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-100">
         <header className="bg-slate-950/95 border-b border-slate-800 shadow-sm">
-          <div className="container mx-20 flex flex-wrap items-center justify-between  px-0 py-4">
+          <div className="container mx-20 flex flex-wrap items-center justify-between px-0 py-4">
             <div>
-             <img src = "/navbar-logo-2.png" alt="QuantRWA Logo" className="h-15 w-70" />
+              <Link href='/' className="flex items-center gap-2">
+                <img src="/navbar-logo-2.png" alt="QuantRWA Logo" className="h-15 w-70" />
+              </Link>
             </div>
             <nav className="flex flex-wrap items-center gap-2 text-sm">
               <Link href="/" className="rounded-full px-4 py-2 text-slate-200 transition hover:bg-slate-800/80">
